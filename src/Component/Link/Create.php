@@ -46,7 +46,7 @@ class Create extends \Sy\Bootstrap\Component\Form {
 	public function submitAction() {
 		try {
 			$this->validatePost();
-			$service = \Sy\Bootstrap\Service\Container::getInstance();
+			$service = \Project\Service\Container::getInstance();
 			$user = $service->user->getCurrentUser();
 			if (!$user->isConnected()) $this->redirect(WEB_ROOT . '/');
 			$url = trim($this->post('url'), '/');

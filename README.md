@@ -26,7 +26,7 @@ And add this method in the class:
 
 ```php
 	public function linkAction() {
-		$service = \Sy\Bootstrap\Service\Container::getInstance();
+		$service = \Project\Service\Container::getInstance();
 		$user = $service->user->getCurrentUser();
 		$p = new \Sy\Component\Html\Element('p');
 		$p->addText($this->_('You can display on your page your web site or social media links'));

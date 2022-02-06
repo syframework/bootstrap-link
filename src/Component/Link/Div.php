@@ -8,7 +8,7 @@ class Div extends \Sy\Component\WebComponent {
 
 	public function __construct($id, $isEdition = false) {
 		parent::__construct();
-		$service = \Sy\Bootstrap\Service\Container::getInstance();
+		$service = \Project\Service\Container::getInstance();
 		$this->links = $service->link->retrieveAll(['WHERE' => ['tag' => $id]]);
 		$this->isEdition = $isEdition;
 	}
