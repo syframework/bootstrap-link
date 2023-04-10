@@ -4,6 +4,16 @@
 
 ## Installation
 
+From your sy/project based application directory, run this command:
+
+```bash
+composer install-plugin link
+```
+---
+**NOTES**
+
+The install-plugin command will do all these following steps:
+
 ```bash
 $ composer require sy/bootstrap-link
 ```
@@ -17,6 +27,8 @@ Use the database installation script: ```sql/install.sql```
 Copy the scss file ```scss/_bootstrap-link.scss``` into your project scss directory: ```protected/scss```
 
 Import it in your ```app.scss``` file and rebuild the css file.
+
+---
 
 ## Add link section in the user account panel
 
