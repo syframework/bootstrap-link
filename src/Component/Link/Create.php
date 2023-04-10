@@ -19,24 +19,23 @@ class Create extends \Sy\Bootstrap\Component\Form {
 			'name'        => 'url',
 			'required'    => 'required',
 			'maxlength'   => 255,
-			'placeholder' => 'https://...'
+			'placeholder' => 'https://...',
 		], [
 			'validator' => [
 				function($value) {
 					if (strlen($value) <= 255) return true;
 					$this->setError($this->_('URL is too long'));
 					return false;
-				}
+				},
 			],
 			'btn-after' => [
 				'label' => 'Add',
-				'attributes' => [
-					'type' => 'submit'
-				],
+				'attributes' => ['type' => 'submit'],
 				'options' => [
-					'color' => 'primary', 'icon' => 'fas fa-plus'
-				]
-			]
+					'color' => 'primary',
+					'icon'  => 'fas fa-plus',
+				],
+			],
 		]);
 
 		// js
@@ -52,13 +51,13 @@ class Create extends \Sy\Bootstrap\Component\Form {
 			$url = trim($this->post('url'), '/');
 			$service->link->change(['tag' => $this->id, 'icon' => $this->getIcon($url), 'url' => $url], ['url' => $url]);
 			$this->setSuccess($this->_('Link added'));
-		} catch(\Sy\Component\Html\Form\Exception $e) {
+		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
 			if (is_null($this->getOption('error'))) {
 				$this->setError($this->_('Please fill the form correctly'));
 			}
 			$this->fill($_POST);
-		} catch(\Sy\Db\MySql\Exception $e) {
+		} catch (\Sy\Db\MySql\Exception $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('Error'));
 		}
