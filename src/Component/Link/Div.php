@@ -4,6 +4,7 @@ namespace Sy\Bootstrap\Component\Link;
 class Div extends \Sy\Component\WebComponent {
 
 	private $links;
+
 	private $isEdition;
 
 	public function __construct($id, $isEdition = false) {
@@ -11,12 +12,10 @@ class Div extends \Sy\Component\WebComponent {
 		$service = \Project\Service\Container::getInstance();
 		$this->links = $service->link->retrieveAll(['WHERE' => ['tag' => $id]]);
 		$this->isEdition = $isEdition;
-	}
 
-	public function __toString() {
-		$this->addTranslator(LANG_DIR);
-		$this->init();
-		return parent::__toString();
+		$this->mount(function () {
+			$this->init();
+		});
 	}
 
 	public function isEmpty() {
@@ -24,6 +23,7 @@ class Div extends \Sy\Component\WebComponent {
 	}
 
 	private function init() {
+		$this->addTranslator(LANG_DIR);
 		$this->setTemplateFile(__DIR__ . '/Div.html');
 
 		$fa = [
