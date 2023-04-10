@@ -18,13 +18,13 @@ class Delete extends \Sy\Bootstrap\Component\Form\Crud\Delete {
 
 	protected function initButton() {
 		$this->addButton('', [
-			'type'           => 'submit',
-			'title'          => $this->_('Delete link'),
-			'data-title'     => $this->_('Delete link'),
-			'data-placement' => 'auto right',
-			'data-container' => 'body',
-			'data-trigger'   => 'hover',
-			'style'          => 'border-top-left-radius:0;border-bottom-left-radius:0',
+			'type'              => 'submit',
+			'title'             => $this->_('Delete link'),
+			'data-bs-title'     => $this->_('Delete link'),
+			'data-bs-placement' => 'auto right',
+			'data-bs-container' => 'body',
+			'data-bs-trigger'   => 'hover',
+			'style'             => 'border-top-left-radius:0;border-bottom-left-radius:0',
 		], [
 			'icon'  => 'fas fa-trash-alt',
 			'color' => 'danger',
