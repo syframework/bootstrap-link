@@ -12,7 +12,7 @@ class Delete extends \Sy\Bootstrap\Component\Form\Crud\Delete {
 
 		$this->setAttributes([
 			'data-confirm' => $this->_('Are you sure to delete?'),
-			'onsubmit'     => "return confirm($('<div />').html($(this).data('confirm')).text())",
+			'onsubmit'     => "return confirm(document.createElement('div').appendChild(document.createTextNode(this.dataset.confirm)).parentNode.innerHTML)",
 		]);
 	}
 
@@ -26,7 +26,7 @@ class Delete extends \Sy\Bootstrap\Component\Form\Crud\Delete {
 			'data-bs-trigger'   => 'hover',
 			'style'             => 'border-top-left-radius:0;border-bottom-left-radius:0',
 		], [
-			'icon'  => 'fas fa-trash-alt',
+			'icon'  => 'trash',
 			'color' => 'danger',
 			'size'  => 'sm'
 		]);
