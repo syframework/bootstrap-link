@@ -1,6 +1,8 @@
 <?php
 namespace Sy\Bootstrap\Component\Link;
 
+use Sy\Bootstrap\Component\Icon;
+
 class Div extends \Sy\Component\WebComponent {
 
 	private $links;
@@ -27,39 +29,39 @@ class Div extends \Sy\Component\WebComponent {
 		$this->setTemplateFile(__DIR__ . '/Div.html');
 
 		$fa = [
-			'website'      => ['title' => $this->_('Website'), 'icon' => 'fas fa-globe'],
-			'facebook'     => ['title' => 'Facebook',          'icon' => 'fab fa-facebook-f'],
-			'instagram'    => ['title' => 'Instagram',         'icon' => 'fab fa-instagram'],
-			'twitter'      => ['title' => 'Twitter',           'icon' => 'fab fa-twitter'],
-			'youtube'      => ['title' => 'Youtube',           'icon' => 'fab fa-youtube'],
-			'vine'         => ['title' => 'Vine',              'icon' => 'fab fa-vine'],
-			'tumblr'       => ['title' => 'Tumblr',            'icon' => 'fab fa-tumblr'],
-			'android'      => ['title' => 'Android',           'icon' => 'fab fa-android'],
-			'apple'        => ['title' => 'Apple',             'icon' => 'fab fa-apple'],
-			'tripadvisor'  => ['title' => 'Tripadvisor',       'icon' => 'fab fa-tripadvisor'],
-			'yelp'         => ['title' => 'Yelp',              'icon' => 'fab fa-yelp'],
-			'pinterest'    => ['title' => 'Pinterest',         'icon' => 'fab fa-pinterest'],
-			'amazon'       => ['title' => 'Amazon',            'icon' => 'fab fa-amazon'],
-			'etsy'         => ['title' => 'Etsy',              'icon' => 'fab fa-etsy'],
-			'foursquare'   => ['title' => 'Foursquare',        'icon' => 'fab fa-foursquare'],
-			'linkedin'     => ['title' => 'LinkedIn',          'icon' => 'fab fa-linkedin'],
-			'snapchat'     => ['title' => 'Snapchat',          'icon' => 'fab fa-snapchat'],
-			'twitch'       => ['title' => 'Twitch',            'icon' => 'fab fa-twitch'],
-			'viadeo'       => ['title' => 'Viadeo',            'icon' => 'fab fa-viadeo'],
-			'vimeo'        => ['title' => 'Vimeo',             'icon' => 'fab fa-vimeo'],
-			'airbnb'       => ['title' => 'Airbnb',            'icon' => 'fab fa-airbnb'],
-			'blogger'      => ['title' => 'Blogger',           'icon' => 'fab fa-blogger'],
-			'discord'      => ['title' => 'Discord',           'icon' => 'fab fa-discord'],
-			'github'       => ['title' => 'Github',            'icon' => 'fab fa-github'],
-			'whatsapp'     => ['title' => 'Whatsapp',          'icon' => 'fab fa-whatsapp'],
-			'telegram'     => ['title' => 'Telegram',          'icon' => 'fab fa-telegram'],
-			'tiktok'       => ['title' => 'Tik Tok',           'icon' => 'fab fa-tiktok'],
+			'website'      => ['title' => $this->_('Website'), 'icon' => 'globe'],
+			'facebook'     => ['title' => 'Facebook',          'icon' => 'facebook-f'],
+			'instagram'    => ['title' => 'Instagram',         'icon' => 'instagram'],
+			'twitter'      => ['title' => 'Twitter',           'icon' => 'twitter'],
+			'youtube'      => ['title' => 'Youtube',           'icon' => 'youtube'],
+			'vine'         => ['title' => 'Vine',              'icon' => 'vine'],
+			'tumblr'       => ['title' => 'Tumblr',            'icon' => 'tumblr'],
+			'android'      => ['title' => 'Android',           'icon' => 'android'],
+			'apple'        => ['title' => 'Apple',             'icon' => 'apple'],
+			'tripadvisor'  => ['title' => 'Tripadvisor',       'icon' => 'tripadvisor'],
+			'yelp'         => ['title' => 'Yelp',              'icon' => 'yelp'],
+			'pinterest'    => ['title' => 'Pinterest',         'icon' => 'pinterest'],
+			'amazon'       => ['title' => 'Amazon',            'icon' => 'amazon'],
+			'etsy'         => ['title' => 'Etsy',              'icon' => 'etsy'],
+			'foursquare'   => ['title' => 'Foursquare',        'icon' => 'foursquare'],
+			'linkedin'     => ['title' => 'LinkedIn',          'icon' => 'linkedin'],
+			'snapchat'     => ['title' => 'Snapchat',          'icon' => 'snapchat'],
+			'twitch'       => ['title' => 'Twitch',            'icon' => 'twitch'],
+			'viadeo'       => ['title' => 'Viadeo',            'icon' => 'viadeo'],
+			'vimeo'        => ['title' => 'Vimeo',             'icon' => 'vimeo'],
+			'airbnb'       => ['title' => 'Airbnb',            'icon' => 'airbnb'],
+			'blogger'      => ['title' => 'Blogger',           'icon' => 'blogger'],
+			'discord'      => ['title' => 'Discord',           'icon' => 'discord'],
+			'github'       => ['title' => 'Github',            'icon' => 'github'],
+			'whatsapp'     => ['title' => 'Whatsapp',          'icon' => 'whatsapp'],
+			'telegram'     => ['title' => 'Telegram',          'icon' => 'telegram'],
+			'tiktok'       => ['title' => 'Tik Tok',           'icon' => 'tiktok'],
 		];
 
 		foreach ($this->links as $link) {
 			$this->setVars([
 				'ID'    => $link['icon'],
-				'ICON'  => $fa[$link['icon']]['icon'],
+				'ICON'  => new Icon($fa[$link['icon']]['icon'], ['icon-style' => 'brands']),
 				'URL'   => $link['url'],
 				'TITLE' => $fa[$link['icon']]['title'],
 				'PROP'  => $link['icon'] === 'website' ? 'itemprop="url"' : '',
