@@ -6,13 +6,11 @@ class Create extends \Sy\Bootstrap\Component\Form {
 	private $id;
 
 	public function __construct($id) {
-		$this->id = $id;
 		parent::__construct();
+		$this->id = $id;
 	}
 
 	public function init() {
-		parent::init();
-
 		$this->addCsrfField();
 
 		$this->addUrl([
@@ -33,13 +31,13 @@ class Create extends \Sy\Bootstrap\Component\Form {
 				'attributes' => ['type' => 'submit'],
 				'options' => [
 					'color' => 'primary',
-					'icon'  => 'fas fa-plus',
+					'icon'  => 'plus',
 				],
 			],
 		]);
 
 		// js
-		$this->addJsCode(file_get_contents(__DIR__ . '/Create.js'));
+		$this->addJsCode(__DIR__ . '/Create.js');
 	}
 
 	public function submitAction() {
@@ -47,19 +45,16 @@ class Create extends \Sy\Bootstrap\Component\Form {
 			$this->validatePost();
 			$service = \Project\Service\Container::getInstance();
 			$user = $service->user->getCurrentUser();
-			if (!$user->isConnected()) $this->redirect(WEB_ROOT . '/');
+			if (!$user->isConnected()) return $this->jsonError(options: ['redirection' => WEB_ROOT . '/']);
 			$url = trim($this->post('url'), '/');
 			$service->link->change(['tag' => $this->id, 'icon' => $this->getIcon($url), 'url' => $url], ['url' => $url]);
-			$this->setSuccess($this->_('Link added'));
+			return $this->jsonSuccess('Link added', ['redirection' => $_SERVER['REQUEST_URI']]);
 		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
-			if (is_null($this->getOption('error'))) {
-				$this->setError($this->_('Please fill the form correctly'));
-			}
-			$this->fill($_POST);
+			return $this->jsonError($this->getOption('error') ?? 'Please fill the form correctly');
 		} catch (\Sy\Db\MySql\Exception $e) {
 			$this->logWarning($e->getMessage());
-			$this->setError($this->_('Error'));
+			return $this->jsonError('Error');
 		}
 	}
 
