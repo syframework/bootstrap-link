@@ -1,33 +1,47 @@
 <?php
 namespace Sy\Bootstrap\Component\Link;
 
+use Sy\Bootstrap\Component\Form\Crud\Delete;
 use Sy\Bootstrap\Component\Icon;
 
 class Div extends \Sy\Component\WebComponent {
 
+	/**
+	 * @var array
+	 */
 	private $links;
 
+	/**
+	 * @var boolean
+	 */
 	private $isEdition;
 
+	/**
+	 * @param int $id
+	 * @param boolean $isEdition
+	 */
 	public function __construct($id, $isEdition = false) {
 		parent::__construct();
+
 		$service = \Project\Service\Container::getInstance();
 		$this->links = $service->link->retrieveAll(['WHERE' => ['tag' => $id]]);
 		$this->isEdition = $isEdition;
+
+		$this->setTemplateFile(__DIR__ . '/Div.html');
 
 		$this->mount(function () {
 			$this->init();
 		});
 	}
 
+	/**
+	 * @return boolean
+	 */
 	public function isEmpty() {
 		return empty($this->links);
 	}
 
 	private function init() {
-		$this->addTranslator(LANG_DIR);
-		$this->setTemplateFile(__DIR__ . '/Div.html');
-
 		$fa = [
 			'website'      => ['title' => $this->_('Website'), 'icon' => 'globe'],
 			'facebook'     => ['title' => 'Facebook',          'icon' => 'facebook-f'],
@@ -60,7 +74,8 @@ class Div extends \Sy\Component\WebComponent {
 
 		foreach ($this->links as $link) {
 			$this->setVars([
-				'ID'    => $link['icon'],
+				'ID'    => $link['id'],
+				'BRAND' => $link['icon'],
 				'ICON'  => new Icon($fa[$link['icon']]['icon'], ['icon-style' => 'brands']),
 				'URL'   => $link['url'],
 				'TITLE' => $fa[$link['icon']]['title'],
@@ -70,7 +85,18 @@ class Div extends \Sy\Component\WebComponent {
 				$this->setVars([
 					'INPUT_GROUP' => 'input-group mb-1',
 				]);
-				$this->setComponent('DELETE', new Delete($link['id']));
+				$this->setComponent('DELETE', new Delete(
+					'link',
+					['id' => $link['id']],
+					[
+						'selector' => '[data-link-id="' . $this->post('id', $link['id']) . '"]',
+						'button-attributes' => [
+							'class' => 'btn-sm rounded-start-0',
+							'data-bs-title' => $this->_('Delete link'),
+							'data-bs-placement' => 'auto',
+						],
+					]
+				));
 				$this->setBlock('DELETE_BLOCK');
 			}
 			$this->setBlock('LINK_BLOCK');
