@@ -28,6 +28,16 @@ $social-colors : (
 	'tiktok': #000000,
 );
 
+.div-social-link {
+	margin-top: 1px;
+	margin-bottom: 1px;
+	display: inline-block;
+
+	&.input-group {
+		display: flex;
+	}
+}
+
 @each $color, $value in $social-colors {
 	.btn-#{$color} {
 		color: #fff !important;
